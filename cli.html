@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CLI | Account Lite</title>
+  <link rel="stylesheet" href="https://unpkg.com/wingcss"/>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="nav horizontal-align">
+    <div class="nav-item"><a href="/">Home</a></div>
+    <div class="nav-item"><a href="https://github.com/captainAyan/accountlite-cli" target="_blank">Github</a></div>
+  </div>
+  <div class="container"><h1>Command Line App</h1></div>
+  <div id="setup" class="container">
+    <h3>Setup</h3>
+    <h4>As User</h4>
+    <p>
+      Download the <code>accountlite.exe</code> binary executable file from the latest
+      <a id="download_link" download>release</a>.
+    </p>
+
+    <h4>As Developer</h4>
+    ⚠ You must have <a href="https://sourceforge.net/projects/mingw/">MinGW</a>
+    installed and setup on your computer. Check by typing <code>g++ --h</code> in
+    your command line.
+
+    <h5>Windows</h5>
+    <ol>
+      <li>Clone the repo and enter the folder</li>
+      <li>Run <code>make.bat</code> or <code>./make.bat</code></li>
+    </ol>
+
+    <h5>Linux & Mac</h5>
+    <ol>
+      <li>Clone the repo and enter the folder</li>
+      <li>Run <code>make.sh</code> or <code>./make.sh</code></li>
+    </ol>
+  </div>
+
+  <div id="docs" class="container">
+    <h3>Documentation</h3>
+    <p>
+      There are 7 commands at this point in the software. ⚠ All the commands are
+      case sensitive
+    </p>
+    <table>
+      <colgroup>
+        <col style="width:20%">
+        <col style="width:80%">
+      </colgroup>
+      <tr><th>Command</th><th>Application</th></tr>
+      <tr>
+        <td><code>:e</code></td>
+        <td>
+          <p>Use this command at any point to exit. If you're in middle of an operation,
+          let's say entering a journal, you can use this command to exit the operation.</p>
+          <p>If you use this command outside an operation, it'll close the software.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td><code>cls</code></td>
+        <td>
+          <p>Clear your screen.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td><code>j</code></td>
+        <td>
+          <p>Create a journal entry.</p>
+          <p>This command will ask for the following inputs</p>
+          <ol>
+            <li><b>DEBIT</b>: Debit side ledger of the journal entry.</li>
+            <li><b>CREDIT</b>: Credit side ledger of the journal entry.</li>
+            <li><b>AMOUNT</b>: Transaction amount.</li>
+            <li><b>NARRATION</b>: Transaction narration/ other details</li>
+          </ol>
+        </td>
+      </tr>
+
+      <tr>
+        <td><code>jd</code></td>
+        <td>
+          <p>View all the journal entries.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td><code>jf</code></td>
+        <td>
+          <p>View all the journal entries for a period.</p>
+          <p>This command will ask for the following inputs</p>
+          <ol>
+            <li><b>FROM</b>: Starting date of the period. <i>(7 days ago is the default)</i></li>
+            <li><b>TO</b>: Ending date of the period. <i>(Today's date is the default)</i></li>
+          </ol>
+        </td>
+      </tr>
+
+      <tr>
+        <td><code>l</code></td>
+        <td>
+          <p>Creates a ledger.</p>
+          <p>This command will ask for the following inputs</p>
+          <ol>
+            <li><b>NAME</b>: Name of the Ledger.</li>
+            <li><b>TYPE</b>: Type of the ledger
+              <ol> <i>Possible Types</i> :
+                <li>Revenue</li>
+                <li>Expenditure</li>
+                <li>Asset</li>
+                <li>Liability</li>
+                <li>Equity</li>
+              </ol>
+            </li>
+          </ol>
+        </td>
+      </tr>
+      <tr>
+        <td><code>ld</code></td>
+        <td>
+          <p>View a particular ledger for a period.</p>
+          <p>This command will ask for the following inputs</p>
+          <ol>
+            <li><b>FROM</b>: Opening date of the ledger. <i>(7 days ago is the default)</i></li>
+            <li><b>TO</b>: Closing date of the ledger. <i>(Today's date is the default)</i></li>
+            <li><b>ACCOUNT NAME</b>: Name of the Ledger/Account.</li>
+          </ol>
+        </td>
+      </tr>
+      <tr>
+        <td><code>ll</code></td>
+        <td>
+          <p>View list of Ledgers/Accounts</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td><code>t</code></td>
+        <td>
+          <p>View the Trial Balance for a period.</p>
+          <p>This command will ask for the following inputs</p>
+          <ol>
+            <li><b>AS ON</b>: 'As On' of the trial balance. <i>(Today's date is the default)</i></li>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="footer container">
+    Made using <a href="https://kbrsh.github.io/wing">Wing CSS</a>
+  </div>
+
+</body>
+<script>
+  (async () => {
+    const rawResponse = await fetch(
+      'https://api.github.com/repos/captainAyan/accountlite-cli/releases/latest',
+      {method: 'GET'}
+    );
+    const content = await rawResponse.json();
+    let version_name = content.tag_name;
+    let download_url = `https://github.com/captainAyan/accountlite-cli/releases/download/${version_name}/accountlite.exe`;
+    document.getElementById("download_link").href = download_url;
+  })();
+</script>
+</html>
