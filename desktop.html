@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CLI | Account Lite</title>
+  <title>Desktop | AccountLite</title>
   <link rel="stylesheet" href="https://unpkg.com/wingcss"/>
   <link rel="stylesheet" href="./style.css">
 </head>
@@ -14,11 +14,30 @@
     <div class="nav-item"><a href="https://github.com/captainAyan/accountlite-desktop" target="_blank">Github</a></div>
   </div>
   <div class="container"><h1>Desktop App</h1></div>
+  <div id="setup" class="container">
+    <h3>Setup</h3>
+    <h4>As User</h4>
+    <p>
+      Download the <code>accountlite.exe</code> binary executable file from the latest
+      <a id="download_link" download>release</a>.
+    </p>
+  </div>
 
   <div class="footer container">
     Made using <a href="https://kbrsh.github.io/wing">Wing CSS</a>
   </div>
 
 </body>
-<script></script>
+<script>
+  (async () => {
+    const rawResponse = await fetch(
+      'https://api.github.com/repos/captainAyan/accountlite-desktop/releases/latest',
+      {method: 'GET'}
+    );
+    const content = await rawResponse.json();
+    let version_name = content.tag_name;
+    let download_url = `https://github.com/captainAyan/accountlite-desktop/releases/download/${version_name}/accountlite.exe`;
+    document.getElementById("download_link").href = download_url;
+  })();
+</script>
 </html>
