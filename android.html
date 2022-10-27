@@ -17,11 +17,31 @@
     <h1>Android App</h1>
     <img src="./images/android_poster.png" class="responsive" alt="" srcset="">
   </div>
+  
+  <div id="setup" class="container">
+    <h3>Setup</h3>
+    <h4>As User</h4>
+    <p>
+      Download the <code>accountlite.apk</code> installer file from the latest
+      <a id="download_link" download>release</a>.
+    </p>
+  </div>
 
   <div class="footer container">
     Made using <a href="https://kbrsh.github.io/wing">Wing CSS</a>
   </div>
 
 </body>
-<script></script>
+<script>
+  (async () => {
+    const rawResponse = await fetch(
+      'https://api.github.com/repos/captainAyan/accountlite-android/releases/latest',
+      {method: 'GET'}
+    );
+    const content = await rawResponse.json();
+    let version_name = content.tag_name;
+    let download_url = `https://github.com/captainAyan/accountlite-android/releases/download/${version_name}/accountlite.apk`;
+    document.getElementById("download_link").href = download_url;
+  })();
+</script>
 </html>
